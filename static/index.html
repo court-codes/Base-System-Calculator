@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Base system calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Base system calculator</h1>
+
+      <form id="calc-form" class="panel" novalidate>
+        <div class="field">
+          <label for="operation">Operation</label>
+          <select id="operation" name="operation" required>
+            <option value="convert">Convert between bases</option>
+            <option value="add">Add (+)</option>
+            <option value="subtract">Subtract (−)</option>
+            <option value="multiply">Multiply (×)</option>
+            <option value="divide">Divide (÷)</option>
+            <option value="sqrt">Square root (√)</option>
+            <option value="nthroot">Nth root (ⁿ√)</option>
+          </select>
+        </div>
+
+        <div id="group-convert" class="field-group">
+          <div class="field">
+            <label for="conv-number">Number</label>
+            <input
+              id="conv-number"
+              name="conv-number"
+              type="text"
+              autocomplete="off"
+            />
+          </div>
+          <div class="row two">
+            <div class="field">
+              <label for="conv-from">Starting Base (2–36)</label>
+              <input
+                id="conv-from"
+                name="conv-from"
+                type="number"
+                min="2"
+                max="36"
+                inputmode="numeric"
+              />
+            </div>
+            <div class="field">
+              <label for="conv-to">Target base (2–36)</label>
+              <input
+                id="conv-to"
+                name="conv-to"
+                type="number"
+                min="2"
+                max="36"
+                inputmode="numeric"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div id="group-binary" class="field-group hidden">
+          <div class="row two">
+            <div class="field">
+              <label for="bin-num1">First number</label>
+              <input id="bin-num1" type="text" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label for="bin-num2">Second number</label>
+              <input id="bin-num2" type="text" autocomplete="off" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="bin-base">Base (2–36)</label>
+            <input
+              id="bin-base"
+              type="number"
+              min="2"
+              max="36"
+              inputmode="numeric"
+            />
+          </div>
+        </div>
+
+        <div id="group-sqrt" class="field-group hidden">
+          <div class="field">
+            <label for="sqrt-number">Number</label>
+            <input id="sqrt-number" type="text" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label for="sqrt-base">Base (2–36)</label>
+            <input
+              id="sqrt-base"
+              type="number"
+              min="2"
+              max="36"
+              inputmode="numeric"
+            />
+          </div>
+        </div>
+
+        <div id="group-nth" class="field-group hidden">
+          <div class="field">
+            <label for="nth-number">Number</label>
+            <input id="nth-number" type="text" autocomplete="off" />
+          </div>
+          <div class="row two">
+            <div class="field">
+              <label for="nth-base">Base (2–36)</label>
+              <input
+                id="nth-base"
+                type="number"
+                min="2"
+                max="36"
+                inputmode="numeric"
+              />
+            </div>
+            <div class="field">
+              <label for="nth-n">Root degree n</label>
+              <input
+                id="nth-n"
+                type="number"
+                min="1"
+                inputmode="numeric"
+              />
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" id="submit-btn">Calculate</button>
+      </form>
+
+      <div id="error-box" class="message-error hidden" role="alert"></div>
+
+      <div id="result-box" class="result-panel hidden">
+        <h2>Result</h2>
+        <p id="result-expression" class="result-expression"></p>
+        <p id="result-value" class="result-value"></p>
+      </div>
+      <footer>
+        Made by
+        <a
+          href="https://www.linkedin.com/in/courtney-lee-82a472283/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Courtney Lee</a>
+      </footer>
+    </main>
+    <script src="calculator.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

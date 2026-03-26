@@ -1,0 +1,1 @@
+# No install required: run `python3 app.py` (uses the Python standard library only).
