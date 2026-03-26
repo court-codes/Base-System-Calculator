@@ -1,4 +1,6 @@
 (function () {
+  const OPERATION_STORAGE_KEY = "bsc.operation";
+
   function calculateApiUrl() {
     try {
       const u = new URL(window.location.href);
@@ -25,6 +27,31 @@
     sqrt: document.getElementById("group-sqrt"),
     nth: document.getElementById("group-nth"),
   };
+
+  function getValidOperations() {
+    return new Set(["convert", "add", "subtract", "multiply", "divide", "sqrt", "nthroot"]);
+  }
+
+  function loadSavedOperation() {
+    try {
+      const saved = window.localStorage.getItem(OPERATION_STORAGE_KEY);
+      if (saved && getValidOperations().has(saved)) {
+        return saved;
+      }
+    } catch (_) {
+      /* ignore storage errors */
+    }
+    return null;
+  }
+
+  function saveOperation(op) {
+    if (!getValidOperations().has(op)) return;
+    try {
+      window.localStorage.setItem(OPERATION_STORAGE_KEY, op);
+    } catch (_) {
+      /* ignore storage errors */
+    }
+  }
 
   function showGroup(op) {
     Object.values(groups).forEach((el) => el.classList.add("hidden"));
@@ -100,10 +127,15 @@
   }
 
   operation.addEventListener("change", () => {
+    saveOperation(operation.value);
     showGroup(operation.value);
     hideMessages();
   });
 
+  const savedOperation = loadSavedOperation();
+  if (savedOperation) {
+    operation.value = savedOperation;
+  }
   showGroup(operation.value);
 
   function calculateLocally(payload) {
